@@ -1,18 +1,19 @@
 using System.Diagnostics.CodeAnalysis;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
+using System.Security.Policy;
+using System.Xml.Linq;
 
 namespace GerenciadorTI
 {
 	public partial class MainForm : Form
 	{
-
+		private string configFilePath = "Config.xml";
 		private PrincipalContext AD;
 		private UserPrincipal user;
 		private UserPrincipal userFound;
 		private ComputerPrincipal computer;
 		private string userOrganizationalUnit;
-		private string permittedLogonWorkstation;
 
 		public MainForm()
 		{
@@ -22,11 +23,39 @@ namespace GerenciadorTI
 				AD = new PrincipalContext(ContextType.Domain);
 				user = new UserPrincipal(AD);
 				InitializeComponent();
+
+				// Verifica se existe arquivo de configuração
+				if (File.Exists(configFilePath))
+				{
+					LoadConfig();
+				}
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show("Erro: " + ex.Message);
 			}
+		}
+		private void LoadConfig()
+		{
+			XElement xml = XElement.Load(configFilePath);
+			textBoxHostSmtp.Text = xml.Element("Host").Value;
+			textBoxPortaSmtp.Text = xml.Element("Porta").Value;
+			checkBoxUsaSSLSmtp.Checked = bool.Parse(xml.Element("SSL").Value);
+			textBoxEmailDestinoPatrimonio.Text = xml.Element("EmailDestinoPatrimonio").Value;
+			textBoxEmailEnvioPatrimonio.Text = xml.Element("EmailEnvioPatrimonio").Value;
+			textBoxEmailEnvioCredenciais.Text = xml.Element("EmailEnvioCredenciais").Value;
+		}
+
+		private void SaveConfig()
+		{
+			XElement xml = new XElement("Config",
+				new XElement("Host", textBoxHostSmtp.Text),
+				new XElement("Porta", textBoxPortaSmtp.Text),
+				new XElement("SSL", checkBoxUsaSSLSmtp.Checked),
+				new XElement("EmailDestinoPatrimonio", textBoxEmailDestinoPatrimonio.Text),
+				new XElement("EmailEnvioPatrimonio", textBoxEmailEnvioPatrimonio.Text),
+				new XElement("EmailEnvioCredenciais", textBoxEmailEnvioCredenciais.Text));
+			xml.Save(configFilePath);
 		}
 
 		private UserPrincipal SearchUser(string username)
@@ -279,6 +308,27 @@ namespace GerenciadorTI
 
 			computer.Save();
 			LoadComputerInfos(computer);
+		}
+
+		private void buttonSalvarConfig_Click(object sender, EventArgs e)
+		{
+			SaveConfig();
+
+			MessageBox.Show("Configurações salvas!");
+		}
+
+		private void buttonResetarConfig_Click(object sender, EventArgs e)
+		{
+			textBoxHostSmtp.Clear();
+			textBoxPortaSmtp.Clear();
+			checkBoxUsaSSLSmtp.Checked = false;
+			textBoxEmailDestinoPatrimonio.Clear();
+			textBoxEmailEnvioPatrimonio.Clear();
+			textBoxEmailEnvioCredenciais.Clear();
+
+			SaveConfig();
+
+			MessageBox.Show("Configurações redefinidas!");
 		}
 	}
 }

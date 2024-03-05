@@ -61,7 +61,26 @@
 			textBoxNetbios = new TextBox();
 			label6 = new Label();
 			tabPagePatrimonio = new TabPage();
+			groupBox7 = new GroupBox();
+			groupBox6 = new GroupBox();
 			tabPageCredenciais = new TabPage();
+			tabPage1 = new TabPage();
+			buttonResetarConfig = new Button();
+			buttonSalvarConfig = new Button();
+			groupBox10 = new GroupBox();
+			textBoxEmailEnvioCredenciais = new TextBox();
+			label11 = new Label();
+			groupBox9 = new GroupBox();
+			textBoxEmailEnvioPatrimonio = new TextBox();
+			label10 = new Label();
+			textBoxEmailDestinoPatrimonio = new TextBox();
+			label9 = new Label();
+			groupBox8 = new GroupBox();
+			checkBoxUsaSSLSmtp = new CheckBox();
+			textBoxPortaSmtp = new TextBox();
+			textBoxHostSmtp = new TextBox();
+			label8 = new Label();
+			label7 = new Label();
 			tabControl.SuspendLayout();
 			tabPageUsuarios.SuspendLayout();
 			groupBox3.SuspendLayout();
@@ -70,6 +89,11 @@
 			tabPageComputadores.SuspendLayout();
 			groupBox5.SuspendLayout();
 			groupBox4.SuspendLayout();
+			tabPagePatrimonio.SuspendLayout();
+			tabPage1.SuspendLayout();
+			groupBox10.SuspendLayout();
+			groupBox9.SuspendLayout();
+			groupBox8.SuspendLayout();
 			SuspendLayout();
 			// 
 			// tabControl
@@ -78,6 +102,7 @@
 			tabControl.Controls.Add(tabPageComputadores);
 			tabControl.Controls.Add(tabPagePatrimonio);
 			tabControl.Controls.Add(tabPageCredenciais);
+			tabControl.Controls.Add(tabPage1);
 			tabControl.Location = new Point(0, 4);
 			tabControl.Name = "tabControl";
 			tabControl.SelectedIndex = 0;
@@ -403,6 +428,8 @@
 			// 
 			// tabPagePatrimonio
 			// 
+			tabPagePatrimonio.Controls.Add(groupBox7);
+			tabPagePatrimonio.Controls.Add(groupBox6);
 			tabPagePatrimonio.Location = new Point(4, 24);
 			tabPagePatrimonio.Name = "tabPagePatrimonio";
 			tabPagePatrimonio.Padding = new Padding(3);
@@ -410,6 +437,24 @@
 			tabPagePatrimonio.TabIndex = 2;
 			tabPagePatrimonio.Text = "Patrimônio";
 			tabPagePatrimonio.UseVisualStyleBackColor = true;
+			// 
+			// groupBox7
+			// 
+			groupBox7.Location = new Point(246, 3);
+			groupBox7.Name = "groupBox7";
+			groupBox7.Size = new Size(249, 274);
+			groupBox7.TabIndex = 1;
+			groupBox7.TabStop = false;
+			groupBox7.Text = "Criação de Patrimônio";
+			// 
+			// groupBox6
+			// 
+			groupBox6.Location = new Point(3, 3);
+			groupBox6.Name = "groupBox6";
+			groupBox6.Size = new Size(237, 274);
+			groupBox6.TabIndex = 0;
+			groupBox6.TabStop = false;
+			groupBox6.Text = "Movimentação de Patrimônio";
 			// 
 			// tabPageCredenciais
 			// 
@@ -420,6 +465,169 @@
 			tabPageCredenciais.TabIndex = 3;
 			tabPageCredenciais.Text = "Credenciais";
 			tabPageCredenciais.UseVisualStyleBackColor = true;
+			// 
+			// tabPage1
+			// 
+			tabPage1.Controls.Add(buttonResetarConfig);
+			tabPage1.Controls.Add(buttonSalvarConfig);
+			tabPage1.Controls.Add(groupBox10);
+			tabPage1.Controls.Add(groupBox9);
+			tabPage1.Controls.Add(groupBox8);
+			tabPage1.Location = new Point(4, 24);
+			tabPage1.Name = "tabPage1";
+			tabPage1.Padding = new Padding(3);
+			tabPage1.Size = new Size(498, 402);
+			tabPage1.TabIndex = 4;
+			tabPage1.Text = "Configurações";
+			tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// buttonResetarConfig
+			// 
+			buttonResetarConfig.Location = new Point(298, 359);
+			buttonResetarConfig.Name = "buttonResetarConfig";
+			buttonResetarConfig.Size = new Size(75, 23);
+			buttonResetarConfig.TabIndex = 4;
+			buttonResetarConfig.Text = "Resetar";
+			buttonResetarConfig.UseVisualStyleBackColor = true;
+			buttonResetarConfig.Click += buttonResetarConfig_Click;
+			// 
+			// buttonSalvarConfig
+			// 
+			buttonSalvarConfig.Location = new Point(112, 359);
+			buttonSalvarConfig.Name = "buttonSalvarConfig";
+			buttonSalvarConfig.Size = new Size(75, 23);
+			buttonSalvarConfig.TabIndex = 3;
+			buttonSalvarConfig.Text = "Salvar";
+			buttonSalvarConfig.UseVisualStyleBackColor = true;
+			buttonSalvarConfig.Click += buttonSalvarConfig_Click;
+			// 
+			// groupBox10
+			// 
+			groupBox10.Controls.Add(textBoxEmailEnvioCredenciais);
+			groupBox10.Controls.Add(label11);
+			groupBox10.Location = new Point(3, 207);
+			groupBox10.Name = "groupBox10";
+			groupBox10.Size = new Size(492, 135);
+			groupBox10.TabIndex = 2;
+			groupBox10.TabStop = false;
+			groupBox10.Text = "Envio de Credenciais";
+			// 
+			// textBoxEmailEnvioCredenciais
+			// 
+			textBoxEmailEnvioCredenciais.Location = new Point(96, 54);
+			textBoxEmailEnvioCredenciais.Name = "textBoxEmailEnvioCredenciais";
+			textBoxEmailEnvioCredenciais.Size = new Size(233, 23);
+			textBoxEmailEnvioCredenciais.TabIndex = 5;
+			// 
+			// label11
+			// 
+			label11.AutoSize = true;
+			label11.Location = new Point(17, 57);
+			label11.Name = "label11";
+			label11.Size = new Size(73, 15);
+			label11.TabIndex = 4;
+			label11.Text = "E-Mail Envio";
+			// 
+			// groupBox9
+			// 
+			groupBox9.Controls.Add(textBoxEmailEnvioPatrimonio);
+			groupBox9.Controls.Add(label10);
+			groupBox9.Controls.Add(textBoxEmailDestinoPatrimonio);
+			groupBox9.Controls.Add(label9);
+			groupBox9.Location = new Point(3, 60);
+			groupBox9.Name = "groupBox9";
+			groupBox9.Size = new Size(492, 141);
+			groupBox9.TabIndex = 1;
+			groupBox9.TabStop = false;
+			groupBox9.Text = "Envio de Patrimônios";
+			// 
+			// textBoxEmailEnvioPatrimonio
+			// 
+			textBoxEmailEnvioPatrimonio.Location = new Point(96, 67);
+			textBoxEmailEnvioPatrimonio.Name = "textBoxEmailEnvioPatrimonio";
+			textBoxEmailEnvioPatrimonio.Size = new Size(233, 23);
+			textBoxEmailEnvioPatrimonio.TabIndex = 3;
+			// 
+			// label10
+			// 
+			label10.AutoSize = true;
+			label10.Location = new Point(17, 70);
+			label10.Name = "label10";
+			label10.Size = new Size(73, 15);
+			label10.TabIndex = 2;
+			label10.Text = "E-Mail Envio";
+			// 
+			// textBoxEmailDestinoPatrimonio
+			// 
+			textBoxEmailDestinoPatrimonio.Location = new Point(96, 25);
+			textBoxEmailDestinoPatrimonio.Name = "textBoxEmailDestinoPatrimonio";
+			textBoxEmailDestinoPatrimonio.Size = new Size(233, 23);
+			textBoxEmailDestinoPatrimonio.TabIndex = 1;
+			// 
+			// label9
+			// 
+			label9.AutoSize = true;
+			label9.Location = new Point(6, 28);
+			label9.Name = "label9";
+			label9.Size = new Size(84, 15);
+			label9.TabIndex = 0;
+			label9.Text = "E-Mail Destino";
+			// 
+			// groupBox8
+			// 
+			groupBox8.Controls.Add(checkBoxUsaSSLSmtp);
+			groupBox8.Controls.Add(textBoxPortaSmtp);
+			groupBox8.Controls.Add(textBoxHostSmtp);
+			groupBox8.Controls.Add(label8);
+			groupBox8.Controls.Add(label7);
+			groupBox8.Location = new Point(3, 3);
+			groupBox8.Name = "groupBox8";
+			groupBox8.Size = new Size(492, 51);
+			groupBox8.TabIndex = 0;
+			groupBox8.TabStop = false;
+			groupBox8.Text = "SMTP";
+			// 
+			// checkBoxUsaSSLSmtp
+			// 
+			checkBoxUsaSSLSmtp.AutoSize = true;
+			checkBoxUsaSSLSmtp.Location = new Point(439, 18);
+			checkBoxUsaSSLSmtp.Name = "checkBoxUsaSSLSmtp";
+			checkBoxUsaSSLSmtp.Size = new Size(44, 19);
+			checkBoxUsaSSLSmtp.TabIndex = 5;
+			checkBoxUsaSSLSmtp.Text = "SSL";
+			checkBoxUsaSSLSmtp.UseVisualStyleBackColor = true;
+			// 
+			// textBoxPortaSmtp
+			// 
+			textBoxPortaSmtp.Location = new Point(376, 16);
+			textBoxPortaSmtp.Name = "textBoxPortaSmtp";
+			textBoxPortaSmtp.Size = new Size(37, 23);
+			textBoxPortaSmtp.TabIndex = 3;
+			// 
+			// textBoxHostSmtp
+			// 
+			textBoxHostSmtp.Location = new Point(44, 16);
+			textBoxHostSmtp.Name = "textBoxHostSmtp";
+			textBoxHostSmtp.Size = new Size(285, 23);
+			textBoxHostSmtp.TabIndex = 2;
+			// 
+			// label8
+			// 
+			label8.AutoSize = true;
+			label8.Location = new Point(335, 19);
+			label8.Name = "label8";
+			label8.Size = new Size(35, 15);
+			label8.TabIndex = 1;
+			label8.Text = "Porta";
+			// 
+			// label7
+			// 
+			label7.AutoSize = true;
+			label7.Location = new Point(6, 19);
+			label7.Name = "label7";
+			label7.Size = new Size(32, 15);
+			label7.TabIndex = 0;
+			label7.Text = "Host";
 			// 
 			// MainForm
 			// 
@@ -444,6 +652,14 @@
 			groupBox5.PerformLayout();
 			groupBox4.ResumeLayout(false);
 			groupBox4.PerformLayout();
+			tabPagePatrimonio.ResumeLayout(false);
+			tabPage1.ResumeLayout(false);
+			groupBox10.ResumeLayout(false);
+			groupBox10.PerformLayout();
+			groupBox9.ResumeLayout(false);
+			groupBox9.PerformLayout();
+			groupBox8.ResumeLayout(false);
+			groupBox8.PerformLayout();
 			ResumeLayout(false);
 		}
 
@@ -482,5 +698,24 @@
 		private Button buttonAdicionarMaquinaLiberada;
 		private ListBox listBoxMaquinaLiberada;
 		private TextBox textBoxMaquinaLiberada;
+		private GroupBox groupBox7;
+		private GroupBox groupBox6;
+		private TabPage tabPage1;
+		private GroupBox groupBox8;
+		private TextBox textBoxPortaSmtp;
+		private TextBox textBoxHostSmtp;
+		private Label label8;
+		private Label label7;
+		private CheckBox checkBoxUsaSSLSmtp;
+		private GroupBox groupBox10;
+		private GroupBox groupBox9;
+		private Label label9;
+		private Button buttonResetarConfig;
+		private Button buttonSalvarConfig;
+		private TextBox textBoxEmailEnvioCredenciais;
+		private Label label11;
+		private TextBox textBoxEmailEnvioPatrimonio;
+		private Label label10;
+		private TextBox textBoxEmailDestinoPatrimonio;
 	}
 }
