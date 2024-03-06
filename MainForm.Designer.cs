@@ -61,8 +61,32 @@
 			textBoxNetbios = new TextBox();
 			label6 = new Label();
 			tabPagePatrimonio = new TabPage();
-			groupBox7 = new GroupBox();
-			groupBox6 = new GroupBox();
+			buttonEnviarPatrimonio = new Button();
+			radioButtonCriacaoPatrimonio = new RadioButton();
+			radioButtonMovimentacaoPatrimonio = new RadioButton();
+			groupBoxCriarPatrimonio = new GroupBox();
+			buttonAnexarTraseira = new Button();
+			buttonAnexarFrontal = new Button();
+			buttonAnexarPlaqueta = new Button();
+			checkBoxTraseira = new CheckBox();
+			checkBoxFrontal = new CheckBox();
+			checkBoxPlaqueta = new CheckBox();
+			label19 = new Label();
+			textBoxDescricaoCPatrimonio = new TextBox();
+			textBoxNumeroCPatrimonio = new TextBox();
+			textBoxLocalCPatrimonio = new TextBox();
+			label18 = new Label();
+			label17 = new Label();
+			label16 = new Label();
+			groupBoxMovimentarPatrimonio = new GroupBox();
+			textBoxDescricaoMPatrimonio = new TextBox();
+			textBoxLocalNovoMPatrimonio = new TextBox();
+			textBoxLocalAtualMPatrimonio = new TextBox();
+			textBoxNumeroMPatrimonio = new TextBox();
+			label15 = new Label();
+			label14 = new Label();
+			label13 = new Label();
+			label12 = new Label();
 			tabPageCredenciais = new TabPage();
 			tabPage1 = new TabPage();
 			buttonResetarConfig = new Button();
@@ -90,6 +114,8 @@
 			groupBox5.SuspendLayout();
 			groupBox4.SuspendLayout();
 			tabPagePatrimonio.SuspendLayout();
+			groupBoxCriarPatrimonio.SuspendLayout();
+			groupBoxMovimentarPatrimonio.SuspendLayout();
 			tabPage1.SuspendLayout();
 			groupBox10.SuspendLayout();
 			groupBox9.SuspendLayout();
@@ -106,7 +132,7 @@
 			tabControl.Location = new Point(0, 4);
 			tabControl.Name = "tabControl";
 			tabControl.SelectedIndex = 0;
-			tabControl.Size = new Size(506, 430);
+			tabControl.Size = new Size(506, 370);
 			tabControl.TabIndex = 0;
 			// 
 			// tabPageUsuarios
@@ -117,7 +143,7 @@
 			tabPageUsuarios.Location = new Point(4, 24);
 			tabPageUsuarios.Name = "tabPageUsuarios";
 			tabPageUsuarios.Padding = new Padding(3);
-			tabPageUsuarios.Size = new Size(498, 402);
+			tabPageUsuarios.Size = new Size(498, 342);
 			tabPageUsuarios.TabIndex = 0;
 			tabPageUsuarios.Text = "Usuários";
 			tabPageUsuarios.UseVisualStyleBackColor = true;
@@ -139,7 +165,7 @@
 			groupBox3.Controls.Add(label2);
 			groupBox3.Location = new Point(3, 81);
 			groupBox3.Name = "groupBox3";
-			groupBox3.Size = new Size(490, 318);
+			groupBox3.Size = new Size(490, 256);
 			groupBox3.TabIndex = 2;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Informações do Usuário";
@@ -187,7 +213,7 @@
 			// buttonTransferirUsuario
 			// 
 			buttonTransferirUsuario.Enabled = false;
-			buttonTransferirUsuario.Location = new Point(224, 285);
+			buttonTransferirUsuario.Location = new Point(364, 218);
 			buttonTransferirUsuario.Name = "buttonTransferirUsuario";
 			buttonTransferirUsuario.Size = new Size(75, 23);
 			buttonTransferirUsuario.TabIndex = 11;
@@ -200,7 +226,7 @@
 			comboBoxUnidadeOrganizacional.DropDownStyle = ComboBoxStyle.DropDownList;
 			comboBoxUnidadeOrganizacional.Enabled = false;
 			comboBoxUnidadeOrganizacional.FormattingEnabled = true;
-			comboBoxUnidadeOrganizacional.Location = new Point(162, 256);
+			comboBoxUnidadeOrganizacional.Location = new Point(145, 219);
 			comboBoxUnidadeOrganizacional.Name = "comboBoxUnidadeOrganizacional";
 			comboBoxUnidadeOrganizacional.Size = new Size(202, 23);
 			comboBoxUnidadeOrganizacional.TabIndex = 10;
@@ -209,7 +235,7 @@
 			// label5
 			// 
 			label5.AutoSize = true;
-			label5.Location = new Point(21, 259);
+			label5.Location = new Point(3, 222);
 			label5.Name = "label5";
 			label5.Size = new Size(136, 15);
 			label5.TabIndex = 8;
@@ -349,7 +375,7 @@
 			tabPageComputadores.Location = new Point(4, 24);
 			tabPageComputadores.Name = "tabPageComputadores";
 			tabPageComputadores.Padding = new Padding(3);
-			tabPageComputadores.Size = new Size(498, 402);
+			tabPageComputadores.Size = new Size(498, 342);
 			tabPageComputadores.TabIndex = 1;
 			tabPageComputadores.Text = "Computadores";
 			tabPageComputadores.UseVisualStyleBackColor = true;
@@ -428,40 +454,283 @@
 			// 
 			// tabPagePatrimonio
 			// 
-			tabPagePatrimonio.Controls.Add(groupBox7);
-			tabPagePatrimonio.Controls.Add(groupBox6);
+			tabPagePatrimonio.Controls.Add(buttonEnviarPatrimonio);
+			tabPagePatrimonio.Controls.Add(radioButtonCriacaoPatrimonio);
+			tabPagePatrimonio.Controls.Add(radioButtonMovimentacaoPatrimonio);
+			tabPagePatrimonio.Controls.Add(groupBoxCriarPatrimonio);
+			tabPagePatrimonio.Controls.Add(groupBoxMovimentarPatrimonio);
 			tabPagePatrimonio.Location = new Point(4, 24);
 			tabPagePatrimonio.Name = "tabPagePatrimonio";
 			tabPagePatrimonio.Padding = new Padding(3);
-			tabPagePatrimonio.Size = new Size(498, 402);
+			tabPagePatrimonio.Size = new Size(498, 342);
 			tabPagePatrimonio.TabIndex = 2;
 			tabPagePatrimonio.Text = "Patrimônio";
 			tabPagePatrimonio.UseVisualStyleBackColor = true;
 			// 
-			// groupBox7
+			// buttonEnviarPatrimonio
 			// 
-			groupBox7.Location = new Point(246, 3);
-			groupBox7.Name = "groupBox7";
-			groupBox7.Size = new Size(249, 274);
-			groupBox7.TabIndex = 1;
-			groupBox7.TabStop = false;
-			groupBox7.Text = "Criação de Patrimônio";
+			buttonEnviarPatrimonio.Location = new Point(205, 270);
+			buttonEnviarPatrimonio.Name = "buttonEnviarPatrimonio";
+			buttonEnviarPatrimonio.Size = new Size(75, 23);
+			buttonEnviarPatrimonio.TabIndex = 4;
+			buttonEnviarPatrimonio.Text = "Enviar";
+			buttonEnviarPatrimonio.UseVisualStyleBackColor = true;
+			buttonEnviarPatrimonio.Click += buttonEnviarPatrimonio_Click;
 			// 
-			// groupBox6
+			// radioButtonCriacaoPatrimonio
 			// 
-			groupBox6.Location = new Point(3, 3);
-			groupBox6.Name = "groupBox6";
-			groupBox6.Size = new Size(237, 274);
-			groupBox6.TabIndex = 0;
-			groupBox6.TabStop = false;
-			groupBox6.Text = "Movimentação de Patrimônio";
+			radioButtonCriacaoPatrimonio.AutoSize = true;
+			radioButtonCriacaoPatrimonio.Location = new Point(262, 6);
+			radioButtonCriacaoPatrimonio.Name = "radioButtonCriacaoPatrimonio";
+			radioButtonCriacaoPatrimonio.Size = new Size(65, 19);
+			radioButtonCriacaoPatrimonio.TabIndex = 3;
+			radioButtonCriacaoPatrimonio.Text = "Criação";
+			radioButtonCriacaoPatrimonio.UseVisualStyleBackColor = true;
+			radioButtonCriacaoPatrimonio.CheckedChanged += radioButtonCriacaoPatrimonio_CheckedChanged;
+			// 
+			// radioButtonMovimentacaoPatrimonio
+			// 
+			radioButtonMovimentacaoPatrimonio.AutoSize = true;
+			radioButtonMovimentacaoPatrimonio.Checked = true;
+			radioButtonMovimentacaoPatrimonio.Location = new Point(151, 6);
+			radioButtonMovimentacaoPatrimonio.Name = "radioButtonMovimentacaoPatrimonio";
+			radioButtonMovimentacaoPatrimonio.Size = new Size(105, 19);
+			radioButtonMovimentacaoPatrimonio.TabIndex = 2;
+			radioButtonMovimentacaoPatrimonio.TabStop = true;
+			radioButtonMovimentacaoPatrimonio.Text = "Movimentação";
+			radioButtonMovimentacaoPatrimonio.UseVisualStyleBackColor = true;
+			radioButtonMovimentacaoPatrimonio.CheckedChanged += radioButtonMovimentacaoPatrimonio_CheckedChanged;
+			// 
+			// groupBoxCriarPatrimonio
+			// 
+			groupBoxCriarPatrimonio.Controls.Add(buttonAnexarTraseira);
+			groupBoxCriarPatrimonio.Controls.Add(buttonAnexarFrontal);
+			groupBoxCriarPatrimonio.Controls.Add(buttonAnexarPlaqueta);
+			groupBoxCriarPatrimonio.Controls.Add(checkBoxTraseira);
+			groupBoxCriarPatrimonio.Controls.Add(checkBoxFrontal);
+			groupBoxCriarPatrimonio.Controls.Add(checkBoxPlaqueta);
+			groupBoxCriarPatrimonio.Controls.Add(label19);
+			groupBoxCriarPatrimonio.Controls.Add(textBoxDescricaoCPatrimonio);
+			groupBoxCriarPatrimonio.Controls.Add(textBoxNumeroCPatrimonio);
+			groupBoxCriarPatrimonio.Controls.Add(textBoxLocalCPatrimonio);
+			groupBoxCriarPatrimonio.Controls.Add(label18);
+			groupBoxCriarPatrimonio.Controls.Add(label17);
+			groupBoxCriarPatrimonio.Controls.Add(label16);
+			groupBoxCriarPatrimonio.Enabled = false;
+			groupBoxCriarPatrimonio.Location = new Point(246, 31);
+			groupBoxCriarPatrimonio.Name = "groupBoxCriarPatrimonio";
+			groupBoxCriarPatrimonio.Size = new Size(249, 233);
+			groupBoxCriarPatrimonio.TabIndex = 1;
+			groupBoxCriarPatrimonio.TabStop = false;
+			groupBoxCriarPatrimonio.Text = "Criação de Patrimônio";
+			// 
+			// buttonAnexarTraseira
+			// 
+			buttonAnexarTraseira.Location = new Point(159, 199);
+			buttonAnexarTraseira.Name = "buttonAnexarTraseira";
+			buttonAnexarTraseira.Size = new Size(53, 23);
+			buttonAnexarTraseira.TabIndex = 20;
+			buttonAnexarTraseira.Text = "Anexar";
+			buttonAnexarTraseira.UseVisualStyleBackColor = true;
+			buttonAnexarTraseira.Click += buttonAnexarTraseira_Click;
+			// 
+			// buttonAnexarFrontal
+			// 
+			buttonAnexarFrontal.Location = new Point(159, 174);
+			buttonAnexarFrontal.Name = "buttonAnexarFrontal";
+			buttonAnexarFrontal.Size = new Size(53, 23);
+			buttonAnexarFrontal.TabIndex = 19;
+			buttonAnexarFrontal.Text = "Anexar";
+			buttonAnexarFrontal.UseVisualStyleBackColor = true;
+			buttonAnexarFrontal.Click += buttonAnexarFrontal_Click;
+			// 
+			// buttonAnexarPlaqueta
+			// 
+			buttonAnexarPlaqueta.Location = new Point(159, 149);
+			buttonAnexarPlaqueta.Name = "buttonAnexarPlaqueta";
+			buttonAnexarPlaqueta.Size = new Size(53, 23);
+			buttonAnexarPlaqueta.TabIndex = 18;
+			buttonAnexarPlaqueta.Text = "Anexar";
+			buttonAnexarPlaqueta.UseVisualStyleBackColor = true;
+			buttonAnexarPlaqueta.Click += buttonAnexarPlaqueta_Click;
+			// 
+			// checkBoxTraseira
+			// 
+			checkBoxTraseira.AutoCheck = false;
+			checkBoxTraseira.AutoSize = true;
+			checkBoxTraseira.Location = new Point(81, 202);
+			checkBoxTraseira.Name = "checkBoxTraseira";
+			checkBoxTraseira.Size = new Size(65, 19);
+			checkBoxTraseira.TabIndex = 17;
+			checkBoxTraseira.Text = "Traseira";
+			checkBoxTraseira.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxFrontal
+			// 
+			checkBoxFrontal.AutoCheck = false;
+			checkBoxFrontal.AutoSize = true;
+			checkBoxFrontal.Location = new Point(81, 177);
+			checkBoxFrontal.Name = "checkBoxFrontal";
+			checkBoxFrontal.Size = new Size(63, 19);
+			checkBoxFrontal.TabIndex = 16;
+			checkBoxFrontal.Text = "Frontal";
+			checkBoxFrontal.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxPlaqueta
+			// 
+			checkBoxPlaqueta.AutoCheck = false;
+			checkBoxPlaqueta.AutoSize = true;
+			checkBoxPlaqueta.Location = new Point(81, 152);
+			checkBoxPlaqueta.Name = "checkBoxPlaqueta";
+			checkBoxPlaqueta.Size = new Size(72, 19);
+			checkBoxPlaqueta.TabIndex = 15;
+			checkBoxPlaqueta.Text = "Plaqueta";
+			checkBoxPlaqueta.UseVisualStyleBackColor = true;
+			// 
+			// label19
+			// 
+			label19.AutoSize = true;
+			label19.Location = new Point(39, 152);
+			label19.Name = "label19";
+			label19.Size = new Size(36, 15);
+			label19.TabIndex = 14;
+			label19.Text = "Fotos";
+			// 
+			// textBoxDescricaoCPatrimonio
+			// 
+			textBoxDescricaoCPatrimonio.Location = new Point(85, 108);
+			textBoxDescricaoCPatrimonio.Name = "textBoxDescricaoCPatrimonio";
+			textBoxDescricaoCPatrimonio.Size = new Size(151, 23);
+			textBoxDescricaoCPatrimonio.TabIndex = 13;
+			// 
+			// textBoxNumeroCPatrimonio
+			// 
+			textBoxNumeroCPatrimonio.Location = new Point(85, 32);
+			textBoxNumeroCPatrimonio.Name = "textBoxNumeroCPatrimonio";
+			textBoxNumeroCPatrimonio.Size = new Size(100, 23);
+			textBoxNumeroCPatrimonio.TabIndex = 11;
+			// 
+			// textBoxLocalCPatrimonio
+			// 
+			textBoxLocalCPatrimonio.Location = new Point(85, 70);
+			textBoxLocalCPatrimonio.Name = "textBoxLocalCPatrimonio";
+			textBoxLocalCPatrimonio.Size = new Size(151, 23);
+			textBoxLocalCPatrimonio.TabIndex = 12;
+			// 
+			// label18
+			// 
+			label18.AutoSize = true;
+			label18.Location = new Point(58, 35);
+			label18.Name = "label18";
+			label18.Size = new Size(21, 15);
+			label18.TabIndex = 8;
+			label18.Text = "N°";
+			// 
+			// label17
+			// 
+			label17.AutoSize = true;
+			label17.Location = new Point(39, 73);
+			label17.Name = "label17";
+			label17.Size = new Size(35, 15);
+			label17.TabIndex = 9;
+			label17.Text = "Local";
+			// 
+			// label16
+			// 
+			label16.AutoSize = true;
+			label16.Location = new Point(16, 111);
+			label16.Name = "label16";
+			label16.Size = new Size(58, 15);
+			label16.TabIndex = 10;
+			label16.Text = "Descrição";
+			// 
+			// groupBoxMovimentarPatrimonio
+			// 
+			groupBoxMovimentarPatrimonio.Controls.Add(textBoxDescricaoMPatrimonio);
+			groupBoxMovimentarPatrimonio.Controls.Add(textBoxLocalNovoMPatrimonio);
+			groupBoxMovimentarPatrimonio.Controls.Add(textBoxLocalAtualMPatrimonio);
+			groupBoxMovimentarPatrimonio.Controls.Add(textBoxNumeroMPatrimonio);
+			groupBoxMovimentarPatrimonio.Controls.Add(label15);
+			groupBoxMovimentarPatrimonio.Controls.Add(label14);
+			groupBoxMovimentarPatrimonio.Controls.Add(label13);
+			groupBoxMovimentarPatrimonio.Controls.Add(label12);
+			groupBoxMovimentarPatrimonio.Location = new Point(3, 31);
+			groupBoxMovimentarPatrimonio.Name = "groupBoxMovimentarPatrimonio";
+			groupBoxMovimentarPatrimonio.Size = new Size(237, 233);
+			groupBoxMovimentarPatrimonio.TabIndex = 0;
+			groupBoxMovimentarPatrimonio.TabStop = false;
+			groupBoxMovimentarPatrimonio.Text = "Movimentação de Patrimônio";
+			// 
+			// textBoxDescricaoMPatrimonio
+			// 
+			textBoxDescricaoMPatrimonio.Location = new Point(72, 146);
+			textBoxDescricaoMPatrimonio.Name = "textBoxDescricaoMPatrimonio";
+			textBoxDescricaoMPatrimonio.Size = new Size(151, 23);
+			textBoxDescricaoMPatrimonio.TabIndex = 7;
+			// 
+			// textBoxLocalNovoMPatrimonio
+			// 
+			textBoxLocalNovoMPatrimonio.Location = new Point(72, 108);
+			textBoxLocalNovoMPatrimonio.Name = "textBoxLocalNovoMPatrimonio";
+			textBoxLocalNovoMPatrimonio.Size = new Size(151, 23);
+			textBoxLocalNovoMPatrimonio.TabIndex = 6;
+			// 
+			// textBoxLocalAtualMPatrimonio
+			// 
+			textBoxLocalAtualMPatrimonio.Location = new Point(72, 70);
+			textBoxLocalAtualMPatrimonio.Name = "textBoxLocalAtualMPatrimonio";
+			textBoxLocalAtualMPatrimonio.Size = new Size(151, 23);
+			textBoxLocalAtualMPatrimonio.TabIndex = 5;
+			// 
+			// textBoxNumeroMPatrimonio
+			// 
+			textBoxNumeroMPatrimonio.Location = new Point(72, 32);
+			textBoxNumeroMPatrimonio.Name = "textBoxNumeroMPatrimonio";
+			textBoxNumeroMPatrimonio.Size = new Size(100, 23);
+			textBoxNumeroMPatrimonio.TabIndex = 4;
+			// 
+			// label15
+			// 
+			label15.AutoSize = true;
+			label15.Location = new Point(8, 149);
+			label15.Name = "label15";
+			label15.Size = new Size(58, 15);
+			label15.TabIndex = 3;
+			label15.Text = "Descrição";
+			// 
+			// label14
+			// 
+			label14.AutoSize = true;
+			label14.Location = new Point(-1, 111);
+			label14.Name = "label14";
+			label14.Size = new Size(67, 15);
+			label14.TabIndex = 2;
+			label14.Text = "Local Novo";
+			// 
+			// label13
+			// 
+			label13.AutoSize = true;
+			label13.Location = new Point(0, 73);
+			label13.Name = "label13";
+			label13.Size = new Size(66, 15);
+			label13.TabIndex = 1;
+			label13.Text = "Local Atual";
+			// 
+			// label12
+			// 
+			label12.AutoSize = true;
+			label12.Location = new Point(45, 35);
+			label12.Name = "label12";
+			label12.Size = new Size(21, 15);
+			label12.TabIndex = 0;
+			label12.Text = "N°";
 			// 
 			// tabPageCredenciais
 			// 
 			tabPageCredenciais.Location = new Point(4, 24);
 			tabPageCredenciais.Name = "tabPageCredenciais";
 			tabPageCredenciais.Padding = new Padding(3);
-			tabPageCredenciais.Size = new Size(498, 402);
+			tabPageCredenciais.Size = new Size(498, 342);
 			tabPageCredenciais.TabIndex = 3;
 			tabPageCredenciais.Text = "Credenciais";
 			tabPageCredenciais.UseVisualStyleBackColor = true;
@@ -476,14 +745,14 @@
 			tabPage1.Location = new Point(4, 24);
 			tabPage1.Name = "tabPage1";
 			tabPage1.Padding = new Padding(3);
-			tabPage1.Size = new Size(498, 402);
+			tabPage1.Size = new Size(498, 342);
 			tabPage1.TabIndex = 4;
 			tabPage1.Text = "Configurações";
 			tabPage1.UseVisualStyleBackColor = true;
 			// 
 			// buttonResetarConfig
 			// 
-			buttonResetarConfig.Location = new Point(298, 359);
+			buttonResetarConfig.Location = new Point(298, 234);
 			buttonResetarConfig.Name = "buttonResetarConfig";
 			buttonResetarConfig.Size = new Size(75, 23);
 			buttonResetarConfig.TabIndex = 4;
@@ -493,7 +762,7 @@
 			// 
 			// buttonSalvarConfig
 			// 
-			buttonSalvarConfig.Location = new Point(112, 359);
+			buttonSalvarConfig.Location = new Point(99, 234);
 			buttonSalvarConfig.Name = "buttonSalvarConfig";
 			buttonSalvarConfig.Size = new Size(75, 23);
 			buttonSalvarConfig.TabIndex = 3;
@@ -505,16 +774,16 @@
 			// 
 			groupBox10.Controls.Add(textBoxEmailEnvioCredenciais);
 			groupBox10.Controls.Add(label11);
-			groupBox10.Location = new Point(3, 207);
+			groupBox10.Location = new Point(3, 169);
 			groupBox10.Name = "groupBox10";
-			groupBox10.Size = new Size(492, 135);
+			groupBox10.Size = new Size(492, 59);
 			groupBox10.TabIndex = 2;
 			groupBox10.TabStop = false;
 			groupBox10.Text = "Envio de Credenciais";
 			// 
 			// textBoxEmailEnvioCredenciais
 			// 
-			textBoxEmailEnvioCredenciais.Location = new Point(96, 54);
+			textBoxEmailEnvioCredenciais.Location = new Point(96, 22);
 			textBoxEmailEnvioCredenciais.Name = "textBoxEmailEnvioCredenciais";
 			textBoxEmailEnvioCredenciais.Size = new Size(233, 23);
 			textBoxEmailEnvioCredenciais.TabIndex = 5;
@@ -522,7 +791,7 @@
 			// label11
 			// 
 			label11.AutoSize = true;
-			label11.Location = new Point(17, 57);
+			label11.Location = new Point(17, 25);
 			label11.Name = "label11";
 			label11.Size = new Size(73, 15);
 			label11.TabIndex = 4;
@@ -536,7 +805,7 @@
 			groupBox9.Controls.Add(label9);
 			groupBox9.Location = new Point(3, 60);
 			groupBox9.Name = "groupBox9";
-			groupBox9.Size = new Size(492, 141);
+			groupBox9.Size = new Size(492, 103);
 			groupBox9.TabIndex = 1;
 			groupBox9.TabStop = false;
 			groupBox9.Text = "Envio de Patrimônios";
@@ -633,7 +902,7 @@
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(502, 434);
+			ClientSize = new Size(502, 374);
 			Controls.Add(tabControl);
 			Icon = (Icon)resources.GetObject("$this.Icon");
 			Name = "MainForm";
@@ -653,6 +922,11 @@
 			groupBox4.ResumeLayout(false);
 			groupBox4.PerformLayout();
 			tabPagePatrimonio.ResumeLayout(false);
+			tabPagePatrimonio.PerformLayout();
+			groupBoxCriarPatrimonio.ResumeLayout(false);
+			groupBoxCriarPatrimonio.PerformLayout();
+			groupBoxMovimentarPatrimonio.ResumeLayout(false);
+			groupBoxMovimentarPatrimonio.PerformLayout();
 			tabPage1.ResumeLayout(false);
 			groupBox10.ResumeLayout(false);
 			groupBox10.PerformLayout();
@@ -698,8 +972,8 @@
 		private Button buttonAdicionarMaquinaLiberada;
 		private ListBox listBoxMaquinaLiberada;
 		private TextBox textBoxMaquinaLiberada;
-		private GroupBox groupBox7;
-		private GroupBox groupBox6;
+		private GroupBox groupBoxCriarPatrimonio;
+		private GroupBox groupBoxMovimentarPatrimonio;
 		private TabPage tabPage1;
 		private GroupBox groupBox8;
 		private TextBox textBoxPortaSmtp;
@@ -717,5 +991,29 @@
 		private TextBox textBoxEmailEnvioPatrimonio;
 		private Label label10;
 		private TextBox textBoxEmailDestinoPatrimonio;
+		private Label label12;
+		private TextBox textBoxDescricaoCPatrimonio;
+		private TextBox textBoxNumeroCPatrimonio;
+		private TextBox textBoxLocalCPatrimonio;
+		private Label label18;
+		private Label label17;
+		private Label label16;
+		private TextBox textBoxDescricaoMPatrimonio;
+		private TextBox textBoxLocalNovoMPatrimonio;
+		private TextBox textBoxLocalAtualMPatrimonio;
+		private TextBox textBoxNumeroMPatrimonio;
+		private Label label15;
+		private Label label14;
+		private Label label13;
+		private Label label19;
+		private Button buttonAnexarTraseira;
+		private Button buttonAnexarFrontal;
+		private Button buttonAnexarPlaqueta;
+		private CheckBox checkBoxTraseira;
+		private CheckBox checkBoxFrontal;
+		private CheckBox checkBoxPlaqueta;
+		private RadioButton radioButtonMovimentacaoPatrimonio;
+		private RadioButton radioButtonCriacaoPatrimonio;
+		private Button buttonEnviarPatrimonio;
 	}
 }

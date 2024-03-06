@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Policy;
 using System.Xml.Linq;
 
@@ -14,6 +16,10 @@ namespace GerenciadorTI
 		private UserPrincipal userFound;
 		private ComputerPrincipal computer;
 		private string userOrganizationalUnit;
+		private string hostPassword;
+		private string filePathPlaqueta;
+		private string filePathFrontal;
+		private string filePathTraseira;
 
 		public MainForm()
 		{
@@ -49,12 +55,12 @@ namespace GerenciadorTI
 		private void SaveConfig()
 		{
 			XElement xml = new XElement("Config",
-				new XElement("Host", textBoxHostSmtp.Text),
-				new XElement("Porta", textBoxPortaSmtp.Text),
+				new XElement("Host", textBoxHostSmtp.Text.Trim()),
+				new XElement("Porta", textBoxPortaSmtp.Text.Trim()),
 				new XElement("SSL", checkBoxUsaSSLSmtp.Checked),
-				new XElement("EmailDestinoPatrimonio", textBoxEmailDestinoPatrimonio.Text),
-				new XElement("EmailEnvioPatrimonio", textBoxEmailEnvioPatrimonio.Text),
-				new XElement("EmailEnvioCredenciais", textBoxEmailEnvioCredenciais.Text));
+				new XElement("EmailDestinoPatrimonio", textBoxEmailDestinoPatrimonio.Text.Trim()),
+				new XElement("EmailEnvioPatrimonio", textBoxEmailEnvioPatrimonio.Text.Trim()),
+				new XElement("EmailEnvioCredenciais", textBoxEmailEnvioCredenciais.Text.Trim()));
 			xml.Save(configFilePath);
 		}
 
@@ -312,9 +318,20 @@ namespace GerenciadorTI
 
 		private void buttonSalvarConfig_Click(object sender, EventArgs e)
 		{
-			SaveConfig();
+			if (!string.IsNullOrEmpty(textBoxHostSmtp.Text.Trim())
+				&& !string.IsNullOrEmpty(textBoxPortaSmtp.Text.Trim())
+				&& !string.IsNullOrEmpty(textBoxEmailDestinoPatrimonio.Text.Trim())
+				&& !string.IsNullOrEmpty(textBoxEmailEnvioPatrimonio.Text.Trim())
+				&& !string.IsNullOrEmpty(textBoxEmailEnvioCredenciais.Text.Trim()))
+			{
+				SaveConfig();
+				MessageBox.Show("Configurações salvas!");
+			}
+			else
+			{
+				MessageBox.Show("Todos os campos de configuração devem estar preenchidos!");
+			}
 
-			MessageBox.Show("Configurações salvas!");
 		}
 
 		private void buttonResetarConfig_Click(object sender, EventArgs e)
@@ -329,6 +346,177 @@ namespace GerenciadorTI
 			SaveConfig();
 
 			MessageBox.Show("Configurações redefinidas!");
+		}
+
+		private void radioButtonMovimentacaoPatrimonio_CheckedChanged(object sender, EventArgs e)
+		{
+			if (radioButtonMovimentacaoPatrimonio.Checked)
+			{
+				radioButtonCriacaoPatrimonio.Checked = false;
+				groupBoxMovimentarPatrimonio.Enabled = true;
+				groupBoxCriarPatrimonio.Enabled = false;
+			}
+		}
+
+		private void radioButtonCriacaoPatrimonio_CheckedChanged(object sender, EventArgs e)
+		{
+			if (radioButtonCriacaoPatrimonio.Checked)
+			{
+				radioButtonMovimentacaoPatrimonio.Checked = false;
+				groupBoxCriarPatrimonio.Enabled = true;
+				groupBoxMovimentarPatrimonio.Enabled = false;
+			}
+		}
+
+		private void buttonEnviarPatrimonio_Click(object sender, EventArgs e)
+		{
+			if (hostPassword == null)
+			{
+				using (PasswordInputDialog passwordInputDialog = new PasswordInputDialog())
+				{
+					if (passwordInputDialog.ShowDialog() == DialogResult.OK)
+					{
+						hostPassword = passwordInputDialog.Password;
+					}
+				}
+			}
+
+			if (File.Exists(configFilePath))
+			{
+				SmtpClient smtpClient = new SmtpClient(textBoxHostSmtp.Text);
+				smtpClient.Port = int.Parse(textBoxPortaSmtp.Text);
+				smtpClient.UseDefaultCredentials = false;
+				smtpClient.Credentials = new NetworkCredential(textBoxEmailEnvioPatrimonio.Text, hostPassword);
+				smtpClient.EnableSsl = checkBoxUsaSSLSmtp.Checked;
+				MailMessage mailMessage = new MailMessage(textBoxEmailEnvioPatrimonio.Text, textBoxEmailDestinoPatrimonio.Text);
+				mailMessage.IsBodyHtml = true;
+				string message;
+
+				if (radioButtonMovimentacaoPatrimonio.Checked)
+				{
+					if (!string.IsNullOrEmpty(textBoxNumeroMPatrimonio.Text.Trim())
+						&& !string.IsNullOrEmpty(textBoxLocalAtualMPatrimonio.Text.Trim())
+						&& !string.IsNullOrEmpty(textBoxLocalNovoMPatrimonio.Text.Trim())
+						&& !string.IsNullOrEmpty(textBoxDescricaoMPatrimonio.Text.Trim()))
+					{
+						mailMessage.Subject = "Movimentação de Patrimônio Nº" + textBoxNumeroMPatrimonio.Text;
+						message = $"" +
+							"<html>" +
+							"<body>" +
+							"<h3>Detalhes da Movimentação de Patrimônio</h3><br>" +
+							$"<strong>Nº:</strong> {textBoxNumeroMPatrimonio.Text}<br>" +
+							$"<strong>Local Atual:</strong> {textBoxLocalAtualMPatrimonio.Text}<br>" +
+							$"<strong>Local Novo:</strong> {textBoxLocalNovoMPatrimonio.Text}<br>" +
+							$"<strong>Descrição:</strong> {textBoxDescricaoMPatrimonio.Text}<br>" +
+							"</body>" +
+							"</html>";
+
+						mailMessage.Body = message;
+					}
+					else
+					{
+						MessageBox.Show("Todas as informações devem ser preenchidas!");
+					}
+				}
+				else
+				{
+					if (!string.IsNullOrEmpty(textBoxNumeroCPatrimonio.Text.Trim())
+										&& !string.IsNullOrEmpty(textBoxLocalCPatrimonio.Text.Trim())
+										&& !string.IsNullOrEmpty(textBoxDescricaoCPatrimonio.Text.Trim())
+										&& checkBoxFrontal.Checked && checkBoxPlaqueta.Checked && checkBoxTraseira.Checked)
+					{
+						mailMessage.Subject = "Novo Patrimônio Nº" + textBoxNumeroCPatrimonio.Text;
+						message = "" +
+							"<html>" +
+							"<body>" +
+							"<h3>Novo Item de Patrimônio</h3><br>" +
+							$"<strong>Nº:</strong> {textBoxNumeroCPatrimonio.Text}<br>" +
+							$"<strong>Local:</strong> {textBoxLocalCPatrimonio.Text}<br>" +
+							$"<strong>Descrição:</strong> {textBoxDescricaoCPatrimonio.Text}<br><br>" +
+							"Fotos seguem em <strong>anexo</strong>." +
+							"</body>" +
+							"</html>";
+						mailMessage.Body = message;
+						Attachment attachmentPlaqueta = new Attachment(filePathPlaqueta);
+						Attachment attachmentFrontal = new Attachment(filePathFrontal);
+						Attachment attachmentTraseira = new Attachment(filePathTraseira);
+
+						mailMessage.Attachments.Add(attachmentPlaqueta);
+						mailMessage.Attachments.Add(attachmentFrontal);
+						mailMessage.Attachments.Add(attachmentTraseira);
+					}
+					else
+					{
+						MessageBox.Show("Todas as informações devem ser preenchidas!");
+					}
+
+				}
+
+				try
+				{
+					smtpClient.Send(mailMessage);
+					MessageBox.Show("E-mail envidado!");
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("O envio falhou: " + ex.ToString());
+				}
+			}
+			else
+			{
+				MessageBox.Show("Configurações de envio não localizada!");
+			}
+		}
+
+		private void buttonAnexarPlaqueta_Click(object sender, EventArgs e)
+		{
+			using (OpenFileDialog openFileDialog = new OpenFileDialog())
+			{
+				openFileDialog.Filter = "Imagens(*.BMP;*.JPG;*.GIF;*.PNG;*.JPEG)|*.BMP;*.JPG;*.GIF;*.PNG;*.JPEG|All files (*.*)|*.*";
+				openFileDialog.FilterIndex = 1;
+				openFileDialog.Multiselect = false;
+				openFileDialog.RestoreDirectory = true;
+
+				if (openFileDialog.ShowDialog() == DialogResult.OK)
+				{
+					filePathPlaqueta = openFileDialog.FileName;
+					checkBoxPlaqueta.Checked = true;
+				}
+			}
+		}
+
+		private void buttonAnexarFrontal_Click(object sender, EventArgs e)
+		{
+			using (OpenFileDialog openFileDialog = new OpenFileDialog())
+			{
+				openFileDialog.Filter = "Imagens(*.BMP;*.JPG;*.GIF;*.PNG;*.JPEG)|*.BMP;*.JPG;*.GIF;*.PNG;*.JPEG|All files (*.*)|*.*";
+				openFileDialog.FilterIndex = 1;
+				openFileDialog.Multiselect = false;
+				openFileDialog.RestoreDirectory = true;
+
+				if (openFileDialog.ShowDialog() == DialogResult.OK)
+				{
+					filePathFrontal = openFileDialog.FileName;
+					checkBoxFrontal.Checked = true;
+				}
+			}
+		}
+
+		private void buttonAnexarTraseira_Click(object sender, EventArgs e)
+		{
+			using (OpenFileDialog openFileDialog = new OpenFileDialog())
+			{
+				openFileDialog.Filter = "Imagens(*.BMP;*.JPG;*.GIF;*.PNG;*.JPEG)|*.BMP;*.JPG;*.GIF;*.PNG;*.JPEG|All files (*.*)|*.*";
+				openFileDialog.FilterIndex = 1;
+				openFileDialog.Multiselect = false;
+				openFileDialog.RestoreDirectory = true;
+
+				if (openFileDialog.ShowDialog() == DialogResult.OK)
+				{
+					filePathTraseira = openFileDialog.FileName;
+					checkBoxTraseira.Checked = true;
+				}
+			}
 		}
 	}
 }
