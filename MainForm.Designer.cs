@@ -88,6 +88,33 @@
 			label13 = new Label();
 			label12 = new Label();
 			tabPageCredenciais = new TabPage();
+			groupBox7 = new GroupBox();
+			groupBoxSysemp = new GroupBox();
+			textBoxSenhaSysemp = new TextBox();
+			textBoxUsuarioSysemp = new TextBox();
+			label27 = new Label();
+			label28 = new Label();
+			groupBoxJrti = new GroupBox();
+			textBoxSenhaJrti = new TextBox();
+			textBoxUsuarioJrti = new TextBox();
+			label26 = new Label();
+			label25 = new Label();
+			checkBoxSysemp = new CheckBox();
+			checkBoxJrti = new CheckBox();
+			groupBox6 = new GroupBox();
+			textBoxEmailUsuarioAd = new TextBox();
+			label29 = new Label();
+			maskedTextBoxPinImpressoras = new MaskedTextBox();
+			label24 = new Label();
+			textBoxImpressorasAd = new TextBox();
+			label23 = new Label();
+			textBoxSenhaAd = new TextBox();
+			label22 = new Label();
+			textBoxUsuarioAd = new TextBox();
+			label21 = new Label();
+			radioButtonSexoF = new RadioButton();
+			radioButtonSexoM = new RadioButton();
+			label20 = new Label();
 			tabPage1 = new TabPage();
 			buttonResetarConfig = new Button();
 			buttonSalvarConfig = new Button();
@@ -105,6 +132,7 @@
 			textBoxHostSmtp = new TextBox();
 			label8 = new Label();
 			label7 = new Label();
+			buttonEnviarCredenciais = new Button();
 			tabControl.SuspendLayout();
 			tabPageUsuarios.SuspendLayout();
 			groupBox3.SuspendLayout();
@@ -116,6 +144,11 @@
 			tabPagePatrimonio.SuspendLayout();
 			groupBoxCriarPatrimonio.SuspendLayout();
 			groupBoxMovimentarPatrimonio.SuspendLayout();
+			tabPageCredenciais.SuspendLayout();
+			groupBox7.SuspendLayout();
+			groupBoxSysemp.SuspendLayout();
+			groupBoxJrti.SuspendLayout();
+			groupBox6.SuspendLayout();
 			tabPage1.SuspendLayout();
 			groupBox10.SuspendLayout();
 			groupBox9.SuspendLayout();
@@ -727,6 +760,9 @@
 			// 
 			// tabPageCredenciais
 			// 
+			tabPageCredenciais.Controls.Add(buttonEnviarCredenciais);
+			tabPageCredenciais.Controls.Add(groupBox7);
+			tabPageCredenciais.Controls.Add(groupBox6);
 			tabPageCredenciais.Location = new Point(4, 24);
 			tabPageCredenciais.Name = "tabPageCredenciais";
 			tabPageCredenciais.Padding = new Padding(3);
@@ -734,6 +770,268 @@
 			tabPageCredenciais.TabIndex = 3;
 			tabPageCredenciais.Text = "Credenciais";
 			tabPageCredenciais.UseVisualStyleBackColor = true;
+			// 
+			// groupBox7
+			// 
+			groupBox7.Controls.Add(groupBoxSysemp);
+			groupBox7.Controls.Add(groupBoxJrti);
+			groupBox7.Controls.Add(checkBoxSysemp);
+			groupBox7.Controls.Add(checkBoxJrti);
+			groupBox7.Location = new Point(209, 3);
+			groupBox7.Name = "groupBox7";
+			groupBox7.Size = new Size(286, 252);
+			groupBox7.TabIndex = 1;
+			groupBox7.TabStop = false;
+			groupBox7.Text = "Sistemas";
+			// 
+			// groupBoxSysemp
+			// 
+			groupBoxSysemp.Controls.Add(textBoxSenhaSysemp);
+			groupBoxSysemp.Controls.Add(textBoxUsuarioSysemp);
+			groupBoxSysemp.Controls.Add(label27);
+			groupBoxSysemp.Controls.Add(label28);
+			groupBoxSysemp.Enabled = false;
+			groupBoxSysemp.Location = new Point(6, 146);
+			groupBoxSysemp.Name = "groupBoxSysemp";
+			groupBoxSysemp.Size = new Size(277, 100);
+			groupBoxSysemp.TabIndex = 4;
+			groupBoxSysemp.TabStop = false;
+			groupBoxSysemp.Text = "SYSEMP";
+			// 
+			// textBoxSenhaSysemp
+			// 
+			textBoxSenhaSysemp.Location = new Point(62, 56);
+			textBoxSenhaSysemp.Name = "textBoxSenhaSysemp";
+			textBoxSenhaSysemp.Size = new Size(148, 23);
+			textBoxSenhaSysemp.TabIndex = 3;
+			// 
+			// textBoxUsuarioSysemp
+			// 
+			textBoxUsuarioSysemp.Location = new Point(63, 24);
+			textBoxUsuarioSysemp.Name = "textBoxUsuarioSysemp";
+			textBoxUsuarioSysemp.Size = new Size(147, 23);
+			textBoxUsuarioSysemp.TabIndex = 2;
+			// 
+			// label27
+			// 
+			label27.AutoSize = true;
+			label27.Location = new Point(17, 59);
+			label27.Name = "label27";
+			label27.Size = new Size(39, 15);
+			label27.TabIndex = 1;
+			label27.Text = "Senha";
+			// 
+			// label28
+			// 
+			label28.AutoSize = true;
+			label28.Location = new Point(10, 27);
+			label28.Name = "label28";
+			label28.Size = new Size(47, 15);
+			label28.TabIndex = 0;
+			label28.Text = "Usuário";
+			// 
+			// groupBoxJrti
+			// 
+			groupBoxJrti.Controls.Add(textBoxSenhaJrti);
+			groupBoxJrti.Controls.Add(textBoxUsuarioJrti);
+			groupBoxJrti.Controls.Add(label26);
+			groupBoxJrti.Controls.Add(label25);
+			groupBoxJrti.Enabled = false;
+			groupBoxJrti.Location = new Point(6, 40);
+			groupBoxJrti.Name = "groupBoxJrti";
+			groupBoxJrti.Size = new Size(277, 100);
+			groupBoxJrti.TabIndex = 2;
+			groupBoxJrti.TabStop = false;
+			groupBoxJrti.Text = "JRTi";
+			// 
+			// textBoxSenhaJrti
+			// 
+			textBoxSenhaJrti.Location = new Point(62, 56);
+			textBoxSenhaJrti.Name = "textBoxSenhaJrti";
+			textBoxSenhaJrti.Size = new Size(148, 23);
+			textBoxSenhaJrti.TabIndex = 3;
+			// 
+			// textBoxUsuarioJrti
+			// 
+			textBoxUsuarioJrti.Location = new Point(63, 24);
+			textBoxUsuarioJrti.Name = "textBoxUsuarioJrti";
+			textBoxUsuarioJrti.Size = new Size(147, 23);
+			textBoxUsuarioJrti.TabIndex = 2;
+			// 
+			// label26
+			// 
+			label26.AutoSize = true;
+			label26.Location = new Point(17, 59);
+			label26.Name = "label26";
+			label26.Size = new Size(39, 15);
+			label26.TabIndex = 1;
+			label26.Text = "Senha";
+			// 
+			// label25
+			// 
+			label25.AutoSize = true;
+			label25.Location = new Point(10, 27);
+			label25.Name = "label25";
+			label25.Size = new Size(47, 15);
+			label25.TabIndex = 0;
+			label25.Text = "Usuário";
+			// 
+			// checkBoxSysemp
+			// 
+			checkBoxSysemp.AutoSize = true;
+			checkBoxSysemp.Location = new Point(147, 15);
+			checkBoxSysemp.Name = "checkBoxSysemp";
+			checkBoxSysemp.Size = new Size(69, 19);
+			checkBoxSysemp.TabIndex = 1;
+			checkBoxSysemp.Text = "SYSEMP";
+			checkBoxSysemp.UseVisualStyleBackColor = true;
+			checkBoxSysemp.CheckedChanged += checkBoxSysemp_CheckedChanged;
+			// 
+			// checkBoxJrti
+			// 
+			checkBoxJrti.AutoSize = true;
+			checkBoxJrti.Location = new Point(96, 15);
+			checkBoxJrti.Name = "checkBoxJrti";
+			checkBoxJrti.Size = new Size(45, 19);
+			checkBoxJrti.TabIndex = 0;
+			checkBoxJrti.Text = "JRTi";
+			checkBoxJrti.UseVisualStyleBackColor = true;
+			checkBoxJrti.CheckedChanged += checkBoxJrti_CheckedChanged;
+			// 
+			// groupBox6
+			// 
+			groupBox6.Controls.Add(textBoxEmailUsuarioAd);
+			groupBox6.Controls.Add(label29);
+			groupBox6.Controls.Add(maskedTextBoxPinImpressoras);
+			groupBox6.Controls.Add(label24);
+			groupBox6.Controls.Add(textBoxImpressorasAd);
+			groupBox6.Controls.Add(label23);
+			groupBox6.Controls.Add(textBoxSenhaAd);
+			groupBox6.Controls.Add(label22);
+			groupBox6.Controls.Add(textBoxUsuarioAd);
+			groupBox6.Controls.Add(label21);
+			groupBox6.Controls.Add(radioButtonSexoF);
+			groupBox6.Controls.Add(radioButtonSexoM);
+			groupBox6.Controls.Add(label20);
+			groupBox6.Location = new Point(3, 3);
+			groupBox6.Name = "groupBox6";
+			groupBox6.Size = new Size(200, 252);
+			groupBox6.TabIndex = 0;
+			groupBox6.TabStop = false;
+			groupBox6.Text = "Informações Básicas";
+			// 
+			// textBoxEmailUsuarioAd
+			// 
+			textBoxEmailUsuarioAd.Location = new Point(56, 169);
+			textBoxEmailUsuarioAd.Name = "textBoxEmailUsuarioAd";
+			textBoxEmailUsuarioAd.Size = new Size(138, 23);
+			textBoxEmailUsuarioAd.TabIndex = 12;
+			// 
+			// label29
+			// 
+			label29.AutoSize = true;
+			label29.Location = new Point(11, 172);
+			label29.Name = "label29";
+			label29.Size = new Size(41, 15);
+			label29.TabIndex = 11;
+			label29.Text = "E-Mail";
+			// 
+			// maskedTextBoxPinImpressoras
+			// 
+			maskedTextBoxPinImpressoras.Location = new Point(79, 125);
+			maskedTextBoxPinImpressoras.Mask = "9999";
+			maskedTextBoxPinImpressoras.Name = "maskedTextBoxPinImpressoras";
+			maskedTextBoxPinImpressoras.Size = new Size(35, 23);
+			maskedTextBoxPinImpressoras.TabIndex = 10;
+			maskedTextBoxPinImpressoras.TextAlign = HorizontalAlignment.Center;
+			// 
+			// label24
+			// 
+			label24.AutoSize = true;
+			label24.Location = new Point(47, 131);
+			label24.Name = "label24";
+			label24.Size = new Size(26, 15);
+			label24.TabIndex = 9;
+			label24.Text = "PIN";
+			// 
+			// textBoxImpressorasAd
+			// 
+			textBoxImpressorasAd.Location = new Point(79, 96);
+			textBoxImpressorasAd.Name = "textBoxImpressorasAd";
+			textBoxImpressorasAd.Size = new Size(115, 23);
+			textBoxImpressorasAd.TabIndex = 8;
+			// 
+			// label23
+			// 
+			label23.AutoSize = true;
+			label23.Location = new Point(3, 99);
+			label23.Name = "label23";
+			label23.Size = new Size(70, 15);
+			label23.TabIndex = 7;
+			label23.Text = "Impressoras";
+			// 
+			// textBoxSenhaAd
+			// 
+			textBoxSenhaAd.Location = new Point(56, 63);
+			textBoxSenhaAd.Name = "textBoxSenhaAd";
+			textBoxSenhaAd.Size = new Size(138, 23);
+			textBoxSenhaAd.TabIndex = 6;
+			// 
+			// label22
+			// 
+			label22.AutoSize = true;
+			label22.Location = new Point(11, 66);
+			label22.Name = "label22";
+			label22.Size = new Size(39, 15);
+			label22.TabIndex = 5;
+			label22.Text = "Senha";
+			// 
+			// textBoxUsuarioAd
+			// 
+			textBoxUsuarioAd.Location = new Point(56, 36);
+			textBoxUsuarioAd.Name = "textBoxUsuarioAd";
+			textBoxUsuarioAd.Size = new Size(138, 23);
+			textBoxUsuarioAd.TabIndex = 4;
+			// 
+			// label21
+			// 
+			label21.AutoSize = true;
+			label21.Location = new Point(3, 39);
+			label21.Name = "label21";
+			label21.Size = new Size(47, 15);
+			label21.TabIndex = 3;
+			label21.Text = "Usuário";
+			// 
+			// radioButtonSexoF
+			// 
+			radioButtonSexoF.AutoSize = true;
+			radioButtonSexoF.Checked = true;
+			radioButtonSexoF.Location = new Point(83, 17);
+			radioButtonSexoF.Name = "radioButtonSexoF";
+			radioButtonSexoF.Size = new Size(31, 19);
+			radioButtonSexoF.TabIndex = 2;
+			radioButtonSexoF.TabStop = true;
+			radioButtonSexoF.Text = "F";
+			radioButtonSexoF.UseVisualStyleBackColor = true;
+			// 
+			// radioButtonSexoM
+			// 
+			radioButtonSexoM.AutoSize = true;
+			radioButtonSexoM.Location = new Point(41, 17);
+			radioButtonSexoM.Name = "radioButtonSexoM";
+			radioButtonSexoM.Size = new Size(36, 19);
+			radioButtonSexoM.TabIndex = 1;
+			radioButtonSexoM.Text = "M";
+			radioButtonSexoM.UseVisualStyleBackColor = true;
+			// 
+			// label20
+			// 
+			label20.AutoSize = true;
+			label20.Location = new Point(3, 19);
+			label20.Name = "label20";
+			label20.Size = new Size(32, 15);
+			label20.TabIndex = 0;
+			label20.Text = "Sexo";
 			// 
 			// tabPage1
 			// 
@@ -898,6 +1196,16 @@
 			label7.TabIndex = 0;
 			label7.Text = "Host";
 			// 
+			// buttonEnviarCredenciais
+			// 
+			buttonEnviarCredenciais.Location = new Point(209, 287);
+			buttonEnviarCredenciais.Name = "buttonEnviarCredenciais";
+			buttonEnviarCredenciais.Size = new Size(75, 23);
+			buttonEnviarCredenciais.TabIndex = 2;
+			buttonEnviarCredenciais.Text = "Enviar";
+			buttonEnviarCredenciais.UseVisualStyleBackColor = true;
+			buttonEnviarCredenciais.Click += buttonEnviarCredenciais_Click;
+			// 
 			// MainForm
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -927,6 +1235,15 @@
 			groupBoxCriarPatrimonio.PerformLayout();
 			groupBoxMovimentarPatrimonio.ResumeLayout(false);
 			groupBoxMovimentarPatrimonio.PerformLayout();
+			tabPageCredenciais.ResumeLayout(false);
+			groupBox7.ResumeLayout(false);
+			groupBox7.PerformLayout();
+			groupBoxSysemp.ResumeLayout(false);
+			groupBoxSysemp.PerformLayout();
+			groupBoxJrti.ResumeLayout(false);
+			groupBoxJrti.PerformLayout();
+			groupBox6.ResumeLayout(false);
+			groupBox6.PerformLayout();
 			tabPage1.ResumeLayout(false);
 			groupBox10.ResumeLayout(false);
 			groupBox10.PerformLayout();
@@ -1015,5 +1332,33 @@
 		private RadioButton radioButtonMovimentacaoPatrimonio;
 		private RadioButton radioButtonCriacaoPatrimonio;
 		private Button buttonEnviarPatrimonio;
+		private GroupBox groupBox7;
+		private GroupBox groupBox6;
+		private MaskedTextBox maskedTextBoxPinImpressoras;
+		private Label label24;
+		private TextBox textBoxImpressorasAd;
+		private Label label23;
+		private TextBox textBoxSenhaAd;
+		private Label label22;
+		private Label label21;
+		private RadioButton radioButtonSexoF;
+		private RadioButton radioButtonSexoM;
+		private Label label20;
+		private TextBox textBoxUsuarioAd;
+		private GroupBox groupBoxJrti;
+		private Label label26;
+		private Label label25;
+		private CheckBox checkBoxSysemp;
+		private CheckBox checkBoxJrti;
+		private TextBox textBoxSenhaJrti;
+		private TextBox textBoxUsuarioJrti;
+		private GroupBox groupBoxSysemp;
+		private TextBox textBoxSenhaSysemp;
+		private TextBox textBoxUsuarioSysemp;
+		private Label label27;
+		private Label label28;
+		private TextBox textBoxEmailUsuarioAd;
+		private Label label29;
+		private Button buttonEnviarCredenciais;
 	}
 }

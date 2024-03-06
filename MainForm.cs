@@ -20,6 +20,7 @@ namespace GerenciadorTI
 		private string filePathPlaqueta;
 		private string filePathFrontal;
 		private string filePathTraseira;
+		private SmtpClient smtpClient;
 
 		public MainForm()
 		{
@@ -50,6 +51,10 @@ namespace GerenciadorTI
 			textBoxEmailDestinoPatrimonio.Text = xml.Element("EmailDestinoPatrimonio").Value;
 			textBoxEmailEnvioPatrimonio.Text = xml.Element("EmailEnvioPatrimonio").Value;
 			textBoxEmailEnvioCredenciais.Text = xml.Element("EmailEnvioCredenciais").Value;
+
+			smtpClient = new SmtpClient(textBoxHostSmtp.Text);
+			smtpClient.Port = int.Parse(textBoxPortaSmtp.Text);
+			smtpClient.UseDefaultCredentials = false;
 		}
 
 		private void SaveConfig()
@@ -62,6 +67,8 @@ namespace GerenciadorTI
 				new XElement("EmailEnvioPatrimonio", textBoxEmailEnvioPatrimonio.Text.Trim()),
 				new XElement("EmailEnvioCredenciais", textBoxEmailEnvioCredenciais.Text.Trim()));
 			xml.Save(configFilePath);
+
+			LoadConfig();
 		}
 
 		private UserPrincipal SearchUser(string username)
@@ -370,25 +377,13 @@ namespace GerenciadorTI
 
 		private void buttonEnviarPatrimonio_Click(object sender, EventArgs e)
 		{
-			if (hostPassword == null)
-			{
-				using (PasswordInputDialog passwordInputDialog = new PasswordInputDialog())
-				{
-					if (passwordInputDialog.ShowDialog() == DialogResult.OK)
-					{
-						hostPassword = passwordInputDialog.Password;
-					}
-				}
-			}
 
 			if (File.Exists(configFilePath))
 			{
-				SmtpClient smtpClient = new SmtpClient(textBoxHostSmtp.Text);
-				smtpClient.Port = int.Parse(textBoxPortaSmtp.Text);
-				smtpClient.UseDefaultCredentials = false;
 				smtpClient.Credentials = new NetworkCredential(textBoxEmailEnvioPatrimonio.Text, hostPassword);
 				smtpClient.EnableSsl = checkBoxUsaSSLSmtp.Checked;
 				MailMessage mailMessage = new MailMessage(textBoxEmailEnvioPatrimonio.Text, textBoxEmailDestinoPatrimonio.Text);
+				mailMessage.CC.Add(textBoxEmailEnvioPatrimonio.Text);
 				mailMessage.IsBodyHtml = true;
 				string message;
 
@@ -412,6 +407,27 @@ namespace GerenciadorTI
 							"</html>";
 
 						mailMessage.Body = message;
+
+						try
+						{
+							if (hostPassword == null)
+							{
+								using (PasswordInputDialog passwordInputDialog = new PasswordInputDialog())
+								{
+									if (passwordInputDialog.ShowDialog() == DialogResult.OK)
+									{
+										hostPassword = passwordInputDialog.Password;
+									}
+								}
+							}
+
+							smtpClient.Send(mailMessage);
+							MessageBox.Show("E-mail envidado!");
+						}
+						catch (Exception ex)
+						{
+							MessageBox.Show("O envio falhou: " + ex.ToString());
+						}
 					}
 					else
 					{
@@ -444,22 +460,33 @@ namespace GerenciadorTI
 						mailMessage.Attachments.Add(attachmentPlaqueta);
 						mailMessage.Attachments.Add(attachmentFrontal);
 						mailMessage.Attachments.Add(attachmentTraseira);
+
+						try
+						{
+							if (hostPassword == null)
+							{
+								using (PasswordInputDialog passwordInputDialog = new PasswordInputDialog())
+								{
+									if (passwordInputDialog.ShowDialog() == DialogResult.OK)
+									{
+										hostPassword = passwordInputDialog.Password;
+									}
+								}
+							}
+
+
+							smtpClient.Send(mailMessage);
+							MessageBox.Show("E-mail envidado!");
+						}
+						catch (Exception ex)
+						{
+							MessageBox.Show("O envio falhou: " + ex.ToString());
+						}
 					}
 					else
 					{
 						MessageBox.Show("Todas as informações devem ser preenchidas!");
 					}
-
-				}
-
-				try
-				{
-					smtpClient.Send(mailMessage);
-					MessageBox.Show("E-mail envidado!");
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show("O envio falhou: " + ex.ToString());
 				}
 			}
 			else
@@ -516,6 +543,147 @@ namespace GerenciadorTI
 					filePathTraseira = openFileDialog.FileName;
 					checkBoxTraseira.Checked = true;
 				}
+			}
+		}
+
+		private void checkBoxJrti_CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBoxJrti.Checked)
+			{
+				groupBoxJrti.Enabled = true;
+			}
+			else
+			{
+				groupBoxJrti.Enabled = false;
+			}
+		}
+
+		private void checkBoxSysemp_CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBoxSysemp.Checked)
+			{
+				groupBoxSysemp.Enabled = true;
+			}
+			else
+			{
+				groupBoxSysemp.Enabled = false;
+			}
+		}
+
+		private void buttonEnviarCredenciais_Click(object sender, EventArgs e)
+		{
+			if (File.Exists(configFilePath))
+			{
+				string jrti = "";
+				string sysemp = "";
+
+
+				if (!string.IsNullOrEmpty(textBoxUsuarioAd.Text.Trim())
+								&& !string.IsNullOrEmpty(textBoxSenhaAd.Text.Trim())
+								&& !string.IsNullOrEmpty(textBoxImpressorasAd.Text.Trim())
+								&& !string.IsNullOrEmpty(maskedTextBoxPinImpressoras.Text.Trim())
+								&& !string.IsNullOrEmpty(textBoxEmailUsuarioAd.Text.Trim()))
+				{
+					if (checkBoxJrti.Checked)
+					{
+						if (!string.IsNullOrEmpty(textBoxUsuarioJrti.Text.Trim())
+							&& !string.IsNullOrEmpty(textBoxSenhaJrti.Text.Trim()))
+						{
+							jrti = $"<strong>Credenciais JRTI:</strong><br>" +
+								$"<strong>Usuário:</strong> {textBoxUsuarioJrti.Text.Trim()}<br>" +
+								$"<strong>Senha:</strong> {textBoxSenhaJrti.Text.Trim()}<br><br>";
+						}
+						else
+						{
+							MessageBox.Show("Todos os campos de informações do JRTi devem estar preenchidos!");
+						}
+					}
+					if (checkBoxSysemp.Checked)
+					{
+						if (!string.IsNullOrEmpty(textBoxUsuarioSysemp.Text.Trim())
+							&& !string.IsNullOrEmpty(textBoxSenhaSysemp.Text.Trim()))
+						{
+							sysemp = $"<strong>Credenciais Sysemp:</strong><br>" +
+								$"<strong>Usuário:</strong> {textBoxUsuarioSysemp.Text.Trim()}<br>" +
+								$"<strong>Senha:</strong> {textBoxSenhaSysemp.Text.Trim()}<br><br>";
+						}
+						else
+						{
+							MessageBox.Show("Todos os campos de informações do Sysemp devem estar preenchidos!");
+						}
+					}
+
+					smtpClient.Credentials = new NetworkCredential(textBoxEmailEnvioCredenciais.Text, hostPassword);
+					smtpClient.EnableSsl = checkBoxUsaSSLSmtp.Checked;
+					try
+					{
+						MailMessage mailMessage = new MailMessage(textBoxEmailEnvioCredenciais.Text, textBoxEmailUsuarioAd.Text);
+						mailMessage.CC.Add(textBoxEmailEnvioCredenciais.Text);
+						mailMessage.IsBodyHtml = true;
+						string pronome = radioButtonSexoF.Checked ? "a" : "o";
+						string subject = $"Bem-vind{pronome}!";
+						string message;
+						mailMessage.Subject = subject;
+						message = "" +
+											"<html>" +
+											"<body>" +
+											$"<h3>Bem-vind{pronome}!</h3><br>" +
+											"Somos da equipe de T.I e viemos te desejar boas-vindas!" +
+											"Segue abaixo as suas credenciais de acesso que irá utilizar:<br><br>" +
+											$"E-mail: {textBoxEmailUsuarioAd.Text.Trim()}<br>" +
+											$"Login: {textBoxUsuarioAd.Text.Trim()}<br>" +
+											$"Senha: {textBoxSenhaAd.Text.Trim()}<br>" +
+											$"Impressoras: {textBoxImpressorasAd.Text.Trim()}<br>" +
+											$"PIN de Impressão: {maskedTextBoxPinImpressoras.Text.Trim()}<br><br>" +
+											$"{jrti}" +
+											$"{sysemp}" +
+											"Por favor, anote estas informações e deixe este e-mail guardado em um local seguro caso " +
+											"necessite revisar estas informações!<br>" +
+											"Qualquer dúvida ou problemas relacionados ao nosso setor, favor abrir um chamado através do " +
+											$"email <a href='maito:{textBoxEmailEnvioCredenciais.Text.Trim()}'>{textBoxEmailEnvioCredenciais.Text.Trim()}</a>.<br><br>" +
+											$"<strong>Observação:</strong> para ser atendido, é <span style='color:red'>CRUCIAL</span>" +
+											$" a abertura de chamado via e-mail pois controlamos e planejamos todos os atendimentos e" +
+											$" procedimentos.<br><br>" +
+											$"Att,<br><br>" +
+											$"<strong>Departamento de Tecnologia da Informação.</strong>" +
+											"</body>" +
+											"</html>";
+
+						mailMessage.Body = message;
+						try
+						{
+							if (hostPassword == null)
+							{
+								using (PasswordInputDialog passwordInputDialog = new PasswordInputDialog())
+								{
+									if (passwordInputDialog.ShowDialog() == DialogResult.OK)
+									{
+										hostPassword = passwordInputDialog.Password;
+									}
+								}
+							}
+
+							smtpClient.Send(mailMessage);
+							MessageBox.Show("E-mail envidado!");
+						}
+						catch (Exception ex)
+						{
+							MessageBox.Show("O envio falhou: " + ex.ToString());
+						}
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show(ex.ToString());
+					}
+				}
+				else
+				{
+					MessageBox.Show("Todos os campos das informações básicas devem estar preenchidos!");
+				}
+			}
+			else
+			{
+				MessageBox.Show("Arquivo de Configuração não encontrado!");
 			}
 		}
 	}
