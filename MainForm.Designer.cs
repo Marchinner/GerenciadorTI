@@ -88,6 +88,7 @@
 			label13 = new Label();
 			label12 = new Label();
 			tabPageCredenciais = new TabPage();
+			buttonEnviarCredenciais = new Button();
 			groupBox7 = new GroupBox();
 			groupBoxSysemp = new GroupBox();
 			textBoxSenhaSysemp = new TextBox();
@@ -132,7 +133,6 @@
 			textBoxHostSmtp = new TextBox();
 			label8 = new Label();
 			label7 = new Label();
-			buttonEnviarCredenciais = new Button();
 			tabControl.SuspendLayout();
 			tabPageUsuarios.SuspendLayout();
 			groupBox3.SuspendLayout();
@@ -771,6 +771,16 @@
 			tabPageCredenciais.Text = "Credenciais";
 			tabPageCredenciais.UseVisualStyleBackColor = true;
 			// 
+			// buttonEnviarCredenciais
+			// 
+			buttonEnviarCredenciais.Location = new Point(209, 287);
+			buttonEnviarCredenciais.Name = "buttonEnviarCredenciais";
+			buttonEnviarCredenciais.Size = new Size(75, 23);
+			buttonEnviarCredenciais.TabIndex = 2;
+			buttonEnviarCredenciais.Text = "Enviar";
+			buttonEnviarCredenciais.UseVisualStyleBackColor = true;
+			buttonEnviarCredenciais.Click += buttonEnviarCredenciais_Click;
+			// 
 			// groupBox7
 			// 
 			groupBox7.Controls.Add(groupBoxSysemp);
@@ -1196,16 +1206,6 @@
 			label7.TabIndex = 0;
 			label7.Text = "Host";
 			// 
-			// buttonEnviarCredenciais
-			// 
-			buttonEnviarCredenciais.Location = new Point(209, 287);
-			buttonEnviarCredenciais.Name = "buttonEnviarCredenciais";
-			buttonEnviarCredenciais.Size = new Size(75, 23);
-			buttonEnviarCredenciais.TabIndex = 2;
-			buttonEnviarCredenciais.Text = "Enviar";
-			buttonEnviarCredenciais.UseVisualStyleBackColor = true;
-			buttonEnviarCredenciais.Click += buttonEnviarCredenciais_Click;
-			// 
 			// MainForm
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1213,6 +1213,8 @@
 			ClientSize = new Size(502, 374);
 			Controls.Add(tabControl);
 			Icon = (Icon)resources.GetObject("$this.Icon");
+			MaximumSize = new Size(518, 413);
+			MinimumSize = new Size(518, 413);
 			Name = "MainForm";
 			StartPosition = FormStartPosition.CenterScreen;
 			Text = "Gerenciador T.I";

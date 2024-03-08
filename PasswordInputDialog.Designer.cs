@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PasswordInputDialog));
 			buttonOk = new Button();
 			textBoxPassword = new TextBox();
 			label1 = new Label();
@@ -80,6 +81,7 @@
 			Controls.Add(label1);
 			Controls.Add(textBoxPassword);
 			Controls.Add(buttonOk);
+			Icon = (Icon)resources.GetObject("$this.Icon");
 			Name = "PasswordInputDialog";
 			StartPosition = FormStartPosition.CenterScreen;
 			Text = "Check de Segurança";

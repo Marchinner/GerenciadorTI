@@ -20,7 +20,6 @@ namespace GerenciadorTI
 		private string filePathPlaqueta;
 		private string filePathFrontal;
 		private string filePathTraseira;
-		private SmtpClient smtpClient;
 
 		public MainForm()
 		{
@@ -51,10 +50,6 @@ namespace GerenciadorTI
 			textBoxEmailDestinoPatrimonio.Text = xml.Element("EmailDestinoPatrimonio").Value;
 			textBoxEmailEnvioPatrimonio.Text = xml.Element("EmailEnvioPatrimonio").Value;
 			textBoxEmailEnvioCredenciais.Text = xml.Element("EmailEnvioCredenciais").Value;
-
-			smtpClient = new SmtpClient(textBoxHostSmtp.Text);
-			smtpClient.Port = int.Parse(textBoxPortaSmtp.Text);
-			smtpClient.UseDefaultCredentials = false;
 		}
 
 		private void SaveConfig()
@@ -380,9 +375,10 @@ namespace GerenciadorTI
 
 			if (File.Exists(configFilePath))
 			{
-				smtpClient.Credentials = new NetworkCredential(textBoxEmailEnvioPatrimonio.Text, hostPassword);
-				smtpClient.EnableSsl = checkBoxUsaSSLSmtp.Checked;
-				MailMessage mailMessage = new MailMessage(textBoxEmailEnvioPatrimonio.Text, textBoxEmailDestinoPatrimonio.Text);
+				LoadConfig();
+				MailMessage mailMessage = new MailMessage();
+				mailMessage.From = new MailAddress(textBoxEmailEnvioPatrimonio.Text);
+				mailMessage.To.Add(new MailAddress(textBoxEmailDestinoPatrimonio.Text));
 				mailMessage.CC.Add(textBoxEmailEnvioPatrimonio.Text);
 				mailMessage.IsBodyHtml = true;
 				string message;
@@ -420,8 +416,14 @@ namespace GerenciadorTI
 									}
 								}
 							}
-
-							smtpClient.Send(mailMessage);
+							using (SmtpClient smtpClient = new SmtpClient(textBoxHostSmtp.Text))
+							{
+								smtpClient.Port = int.Parse(textBoxPortaSmtp.Text);
+								smtpClient.UseDefaultCredentials = false;
+								smtpClient.EnableSsl = checkBoxUsaSSLSmtp.Checked;
+								smtpClient.Credentials = new NetworkCredential(textBoxEmailEnvioPatrimonio.Text, hostPassword);
+								smtpClient.Send(mailMessage);
+							}
 							MessageBox.Show("E-mail envidado!");
 						}
 						catch (Exception ex)
@@ -473,10 +475,19 @@ namespace GerenciadorTI
 									}
 								}
 							}
+							using (SmtpClient smtpClient = new SmtpClient(textBoxHostSmtp.Text))
+							{
+								smtpClient.Port = int.Parse(textBoxPortaSmtp.Text);
+								smtpClient.UseDefaultCredentials = false;
+								smtpClient.EnableSsl = checkBoxUsaSSLSmtp.Checked;
+								smtpClient.Credentials = new NetworkCredential(textBoxEmailEnvioPatrimonio.Text, hostPassword);
+								smtpClient.Send(mailMessage);
+							}
 
-
-							smtpClient.Send(mailMessage);
 							MessageBox.Show("E-mail envidado!");
+							checkBoxPlaqueta.Checked = false;
+							checkBoxFrontal.Checked = false;
+							checkBoxTraseira.Checked = false;
 						}
 						catch (Exception ex)
 						{
@@ -574,9 +585,18 @@ namespace GerenciadorTI
 		{
 			if (File.Exists(configFilePath))
 			{
+				LoadConfig();
+				MailMessage welcomeMailMessage = new MailMessage(textBoxEmailEnvioCredenciais.Text, textBoxEmailUsuarioAd.Text);
+				welcomeMailMessage.CC.Add(textBoxEmailEnvioCredenciais.Text);
+				welcomeMailMessage.IsBodyHtml = true;
+				string pronome = radioButtonSexoF.Checked ? "a" : "o";
+				string subject = $"Bem-vind{pronome}!";
+				string message;
 				string jrti = "";
 				string sysemp = "";
-
+				welcomeMailMessage.Subject = subject;
+				bool checkInformacoesJrti = true;
+				bool checkInformacoesSysemp = true;
 
 				if (!string.IsNullOrEmpty(textBoxUsuarioAd.Text.Trim())
 								&& !string.IsNullOrEmpty(textBoxSenhaAd.Text.Trim())
@@ -592,10 +612,12 @@ namespace GerenciadorTI
 							jrti = $"<strong>Credenciais JRTI:</strong><br>" +
 								$"<strong>Usuário:</strong> {textBoxUsuarioJrti.Text.Trim()}<br>" +
 								$"<strong>Senha:</strong> {textBoxSenhaJrti.Text.Trim()}<br><br>";
+							checkInformacoesJrti = true;
 						}
 						else
 						{
 							MessageBox.Show("Todos os campos de informações do JRTi devem estar preenchidos!");
+							checkInformacoesJrti = false;
 						}
 					}
 					if (checkBoxSysemp.Checked)
@@ -606,50 +628,46 @@ namespace GerenciadorTI
 							sysemp = $"<strong>Credenciais Sysemp:</strong><br>" +
 								$"<strong>Usuário:</strong> {textBoxUsuarioSysemp.Text.Trim()}<br>" +
 								$"<strong>Senha:</strong> {textBoxSenhaSysemp.Text.Trim()}<br><br>";
+							checkInformacoesSysemp = true;
 						}
 						else
 						{
 							MessageBox.Show("Todos os campos de informações do Sysemp devem estar preenchidos!");
+							checkInformacoesSysemp = false;
 						}
 					}
 
-					smtpClient.Credentials = new NetworkCredential(textBoxEmailEnvioCredenciais.Text, hostPassword);
-					smtpClient.EnableSsl = checkBoxUsaSSLSmtp.Checked;
-					try
+					if (checkInformacoesJrti && checkInformacoesSysemp)
 					{
-						MailMessage mailMessage = new MailMessage(textBoxEmailEnvioCredenciais.Text, textBoxEmailUsuarioAd.Text);
-						mailMessage.CC.Add(textBoxEmailEnvioCredenciais.Text);
-						mailMessage.IsBodyHtml = true;
-						string pronome = radioButtonSexoF.Checked ? "a" : "o";
-						string subject = $"Bem-vind{pronome}!";
-						string message;
-						mailMessage.Subject = subject;
-						message = "" +
-											"<html>" +
-											"<body>" +
-											$"<h3>Bem-vind{pronome}!</h3><br>" +
-											"Somos da equipe de T.I e viemos te desejar boas-vindas!" +
-											"Segue abaixo as suas credenciais de acesso que irá utilizar:<br><br>" +
-											$"E-mail: {textBoxEmailUsuarioAd.Text.Trim()}<br>" +
-											$"Login: {textBoxUsuarioAd.Text.Trim()}<br>" +
-											$"Senha: {textBoxSenhaAd.Text.Trim()}<br>" +
-											$"Impressoras: {textBoxImpressorasAd.Text.Trim()}<br>" +
-											$"PIN de Impressão: {maskedTextBoxPinImpressoras.Text.Trim()}<br><br>" +
-											$"{jrti}" +
-											$"{sysemp}" +
-											"Por favor, anote estas informações e deixe este e-mail guardado em um local seguro caso " +
-											"necessite revisar estas informações!<br>" +
-											"Qualquer dúvida ou problemas relacionados ao nosso setor, favor abrir um chamado através do " +
-											$"email <a href='maito:{textBoxEmailEnvioCredenciais.Text.Trim()}'>{textBoxEmailEnvioCredenciais.Text.Trim()}</a>.<br><br>" +
-											$"<strong>Observação:</strong> para ser atendido, é <span style='color:red'>CRUCIAL</span>" +
-											$" a abertura de chamado via e-mail pois controlamos e planejamos todos os atendimentos e" +
-											$" procedimentos.<br><br>" +
-											$"Att,<br><br>" +
-											$"<strong>Departamento de Tecnologia da Informação.</strong>" +
-											"</body>" +
-											"</html>";
 
-						mailMessage.Body = message;
+						message = "" +
+															"<html>" +
+															"<body>" +
+															$"<h3>Bem-vind{pronome}!</h3><br>" +
+															"Somos da equipe de T.I e viemos te desejar boas-vindas!" +
+															"Segue abaixo as suas credenciais de acesso que irá utilizar:<br><br>" +
+															$"<strong>E-mail:</strong> {textBoxEmailUsuarioAd.Text.Trim()}<br>" +
+															$"<strong>Login:</strong> {textBoxUsuarioAd.Text.Trim()}<br>" +
+															$"<strong>Senha:</strong> {textBoxSenhaAd.Text.Trim()}<br>" +
+															$"<strong>Impressoras:</strong> {textBoxImpressorasAd.Text.Trim()}<br>" +
+															$"<strong>PIN de Impressão:</strong> {maskedTextBoxPinImpressoras.Text.Trim()}<br><br>" +
+															$"{jrti}" +
+															$"{sysemp}" +
+															"Por favor, anote estas informações e deixe este e-mail guardado em um local seguro caso " +
+															"necessite revisar estas informações!<br>" +
+															"Qualquer dúvida ou problemas relacionados ao nosso setor, favor abrir um chamado através do " +
+															$"email <a href='maito:{textBoxEmailEnvioCredenciais.Text.Trim()}'>{textBoxEmailEnvioCredenciais.Text.Trim()}</a>.<br><br>" +
+															$"<strong>Observação:</strong> para ser atendido, é <span style='color:red'>CRUCIAL</span>" +
+															$" a abertura de chamado via e-mail pois controlamos e planejamos todos os atendimentos e" +
+															$" procedimentos.<br><br>" +
+															$"Att,<br><br>" +
+															$"<strong>Departamento de Tecnologia da Informação.</strong>" +
+															"</body>" +
+															"</html>";
+
+						welcomeMailMessage.Body = message;
+
+
 						try
 						{
 							if (hostPassword == null)
@@ -662,18 +680,20 @@ namespace GerenciadorTI
 									}
 								}
 							}
-
-							smtpClient.Send(mailMessage);
+							using (SmtpClient smtpClient = new SmtpClient(textBoxHostSmtp.Text))
+							{
+								smtpClient.Port = int.Parse(textBoxPortaSmtp.Text);
+								smtpClient.UseDefaultCredentials = false;
+								smtpClient.EnableSsl = checkBoxUsaSSLSmtp.Checked;
+								smtpClient.Credentials = new NetworkCredential(textBoxEmailEnvioCredenciais.Text, hostPassword);
+								smtpClient.Send(welcomeMailMessage);
+							}
 							MessageBox.Show("E-mail envidado!");
 						}
 						catch (Exception ex)
 						{
 							MessageBox.Show("O envio falhou: " + ex.ToString());
 						}
-					}
-					catch (Exception ex)
-					{
-						MessageBox.Show(ex.ToString());
 					}
 				}
 				else
