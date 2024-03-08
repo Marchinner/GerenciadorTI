@@ -1,28 +1,28 @@
 # GerenciadorTI
 
-Este projeto È a ˙ltima vers„o melhorada do meu outro projeto [Ferramentas T.I](https://github.com/Marchinner/FerramentasTI). 
-Esta vers„o foi desenvolvida em C# com o int˙ito de otimizar a velocidade de execuÁ„o do programa, suas
-funÁıes e tambÈm colocar em pr·tica conhecimentos obtidos enquanto eu estava estudando C# e seus usos.
+Este projeto √© a √∫ltima vers√£o melhorada do meu outro projeto [Ferramentas T.I](https://github.com/Marchinner/FerramentasTI). 
+Esta vers√£o foi desenvolvida em C# com o int√∫ito de otimizar a velocidade de execu√ß√£o do programa, suas
+fun√ß√µes e tamb√©m colocar em pr√°tica conhecimentos obtidos enquanto eu estava estudando C# e seus usos.
 
-As diferenÁas mais marcantes deste projeto para o outro s„o:
-	-	ImplementaÁ„o e busca de informaÁıes totalmente automatizada, sem a necessidade de inserir informaÁıes privadas no cÛdigo do programa.
-	-	Funcionamento em qualquer computador com acesso Administrativo a um Active Directory.
-	-	Arquivo de configuraÁıes em XML para envio de e-mails.
+As diferen√ßas mais marcantes deste projeto para o outro s√£o:
+- Implementa√ß√£o e busca de informa√ß√µes totalmente automatizada, sem a necessidade de inserir informa√ß√µes privadas no c√≥digo do programa.
+- Funcionamento em qualquer computador com acesso Administrativo a um Active Directory.
+- Arquivo de configura√ß√µes em XML para envio de e-mails.
 
 ## Screenshots
-![Menu Usu·rios](images/menu_usuarios.png)
+![Menu Usu√°rios](images/menu_usuarios.png)
 ![Menu Computadores](images/menu_computadores.png)
-![Menu Movimentar PatrimÙnio](images/menu_patrimonio_movimentar.png)
-![Menu Criar PatrimÙnio](images/menu_patrimonio_criar.png)
+![Menu Movimentar Patrim√¥nio](images/menu_patrimonio_movimentar.png)
+![Menu Criar Patrim√¥nio](images/menu_patrimonio_criar.png)
 ![Menu Credenciais](images/menu_credenciais.png)
-![Menu ConfiguraÁıes](images/menu_configuracoes.png)
+![Menu Configura√ß√µes](images/menu_configuracoes.png)
 
 ## Funcionalidades
-- Buscar e editar informaÁıes do usu·rio, mover, ativar, alterar e-mail e computador liberado para logon
+- Buscar e editar informa√ß√µes do usu√°rio, mover, ativar, alterar e-mail e computador liberado para logon
 - Buscar e habilitar/desabilitar computadores da rede
-- Enviar uma mensagem autom·tica conforme o formul·rio para informar a movimentaÁ„o de um item de patrimÙnio
-- Enviar uma mensagem autom·tica para um novo item de patrimÙnio e anexar as fotos necess·rias para cadastro
-- Enviar uma mensagem autom·tica de "boas vindas" que informa ao novo colaborador sobre suas credenciais e acessos
+- Enviar uma mensagem autom√°tica conforme o formul√°rio para informar a movimenta√ß√£o de um item de patrim√¥nio
+- Enviar uma mensagem autom√°tica para um novo item de patrim√¥nio e anexar as fotos necess√°rias para cadastro
+- Enviar uma mensagem autom√°tica de "boas vindas" que informa ao novo colaborador sobre suas credenciais e acessos
 
 
 ## Tecnologias
